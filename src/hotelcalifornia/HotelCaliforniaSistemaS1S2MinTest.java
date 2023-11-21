@@ -1,14 +1,9 @@
 package hotelcalifornia;
 
 import exception.HotelCaliforniaException;
-
 import org.junit.jupiter.api.*;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
 import controller.ReservasSessionController;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;

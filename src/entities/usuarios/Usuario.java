@@ -14,12 +14,36 @@ public abstract class Usuario {
 		this.doc = doc;
 	}
 
-	public abstract String getId();
-	public abstract String getNome();
-	public abstract String getTipo();
-	public abstract long getDoc();
-	public abstract void setTipo(String novoTipo);
-	public abstract void setId(String idnovo);
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public long getDoc() {
+		return doc;
+	}
+
+	public void setDoc(long doc) {
+		this.doc = doc;
+	}
 
 }

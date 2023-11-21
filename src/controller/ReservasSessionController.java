@@ -67,18 +67,20 @@ public class ReservasSessionController {
 
 	public String reservarQuartoSingle(String idAutenticacao, String idCliente, int numQuarto, LocalDateTime dataInicio, LocalDateTime dataFim, String[] idRefeicoes) {
 		StringBuilder out = new StringBuilder();
-
 		Quartos q = controllerQuartos.getQuartos().get(numQuarto);
 		Usuario u = controllerusuarios.getUsuarios().get(idAutenticacao);
-		Usuario u1 = controllerusuarios.getUsuarios().get(idCliente);
+		Usuario userClient = controllerusuarios.getUsuarios().get(idCliente);
 		Refeicao[] arrRefeicao = controllerRefeicao.getRefeicoesPorId(idRefeicoes);
 
 		if (q == null) {
 			throw new HotelCaliforniaException("QUARTO NÃO EXISTE!");
 		}
+		
 		if (u == null) {
 			throw new HotelCaliforniaException("USUÁRIO NÃO EXISTE!");
-		} else if (u1 == null) {
+		}
+		
+		if (userClient == null) {
 			throw new HotelCaliforniaException("CLIENTE NÃO EXISTE!");
 		}
 
@@ -90,11 +92,10 @@ public class ReservasSessionController {
 		String regex = "(FUN|GER)\\d+";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(idAutenticacaoUsuario);
-
 		if (matcher.find() && dataInicio.isBefore(dataFim) && dataInicio.toLocalTime().isAfter(LocalTime.of(13, 59))
 				&& dataFim.toLocalTime().isBefore(LocalTime.of(12, 1))) {
 			if (q.getDataInicio() == null || !isReservaSobreposta(q.getDataInicio(), q.getDataFim(), dataInicio, dataFim)) {
-				Reservas novaReserva = new ReservaSingle(idCliente, numQuarto, dataInicio, dataFim, arrRefeicao, q, u1, "QUARTO");
+				Reservas novaReserva = new ReservaSingle(idCliente, numQuarto, dataInicio, dataFim, arrRefeicao, q, userClient, "QUARTO");
 				reservas.put(this.contador++, novaReserva);
 				q.setDates(dataInicio, dataFim);
 				q.setReservado(true);
@@ -111,18 +112,20 @@ public class ReservasSessionController {
 
 	public String reservarQuartoDouble(String idAutenticacao, String idCliente, int numQuarto, LocalDateTime dataInicio,LocalDateTime dataFim, String[] idRefeicoes, String [] pedidos) {
 		StringBuilder out = new StringBuilder();
-
 		Quartos q = controllerQuartos.getQuartos().get(numQuarto);
 		Usuario u = controllerusuarios.getUsuarios().get(idAutenticacao);
-		Usuario u1 = controllerusuarios.getUsuarios().get(idCliente);
+		Usuario userClient = controllerusuarios.getUsuarios().get(idCliente);
 		Refeicao[] arrRefeicao = controllerRefeicao.getRefeicoesPorId(idRefeicoes);
 
 		if (q == null) {
 			throw new HotelCaliforniaException("QUARTO NÃO EXISTE!");
 		}
+		
 		if (u == null) {
 			throw new HotelCaliforniaException("USUÁRIO NÃO EXISTE!");
-		} else if (u1 == null) {
+		}
+		
+		if (userClient == null) {
 			throw new HotelCaliforniaException("CLIENTE NÃO EXISTE!");
 		}
 
@@ -138,7 +141,7 @@ public class ReservasSessionController {
 		if (matcher.find() && dataInicio.isBefore(dataFim) && dataInicio.toLocalTime().isAfter(LocalTime.of(13, 59))
 				&& dataFim.toLocalTime().isBefore(LocalTime.of(12, 1))) {
 			if (q.getDataInicio() == null || !isReservaSobreposta(q.getDataInicio(), q.getDataFim(), dataInicio, dataFim)) {
-				Reservas novaReserva = new ReservaDouble(idCliente, numQuarto, dataInicio, dataFim, arrRefeicao, q, u1,"QUARTO");
+				Reservas novaReserva = new ReservaDouble(idCliente, numQuarto, dataInicio, dataFim, arrRefeicao, q, userClient,"QUARTO");
 				reservas.put(this.contador++, novaReserva);
 				q.setDates(dataInicio, dataFim);
 				q.setReservado(true);

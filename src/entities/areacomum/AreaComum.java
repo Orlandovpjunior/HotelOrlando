@@ -18,17 +18,11 @@ public abstract class AreaComum {
 	
 	public AreaComum(String titulo, String tipo, LocalTime dataInicio, LocalTime dataFim,int numPessoas, double valorPessoa,boolean disponivel) {
 		this.titulo = titulo;
-		this.tipo = null;
-		this.dataInicio = null;
-		this.dataFim = null;
 		this.valorPessoa = valorPessoa;
 		this.numPessoas = numPessoas;
 		this.disponivel = disponivel;
 		this.contador = aux++;
-		this.isPago = false;
 	}
-
-	public abstract String toString();
 	
 	public boolean isPago() {
 		return isPago;

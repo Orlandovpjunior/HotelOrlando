@@ -20,14 +20,8 @@ public abstract class Reservas {
 	protected int numPessoas;
 
 	public Reservas(String idCliente, String tipo) {
-		this.dataInicio = null;
-		this.dataFim = null;
 		this.idCliente = idCliente;
-		this.numQuarto = 0;
-	    this.refeicoes = null;
 	    this.contador = aux++;
-	    this.statusPago = false;
-	    this.numPessoas = 0;
 	    this.tipo = tipo;
 	}
 
